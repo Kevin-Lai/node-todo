@@ -4,6 +4,8 @@ angular.module('todoController', [])
 	.controller('mainController', ['$scope','$http','Todos', function($scope, $http, Todos) {
 		$scope.formData = {};
 		$scope.loading = true;
+	        $scope.completeStatus = false;
+	        $scope.snoozeStatus = false;
 
 		// GET =====================================================================
 		// when landing on the page, get all todos and show them
@@ -34,5 +36,47 @@ angular.module('todoController', [])
 					});
 			}
 		};
+
+$scope.completeTodo = function(){
+    // To check the completed box
+    if($scope.completeStatus == false){
+	Todos.complete($scope.completeStatus)
+	.success(function(data){
+	    $scope.completeStatus = true;
+	    });
+	 }
+	// To uncheck
+	else{
+	    Todos.complete($scope.completeStatus)
+	    .success(function(data){
+		$scope.completeStatus = false;
+		});
+	}
+})
+
+$scope.snoozeTodo = function(){
+    // To check the snooze
+    if($scope.snoozeStatus == false){
+	Todos.snooze($scope.completeStatus)
+	.success(function(data){
+	    $scope.snoozeStatus = true;
+	    });
+	}
+	// To uncheck
+	else{
+	    Todos.snooze($scope.snoozeStatus)
+	    .success(function(data){
+		$scope.snoozeStatus = false;
+		});
+		     
+	}
+}
+
+$scope.deleteTodo = function(){
+    Todos.delete($scope.formData)
+    .success(function(data){
+    });
+}
+
 
 	}]);

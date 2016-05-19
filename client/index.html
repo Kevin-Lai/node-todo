@@ -42,10 +42,20 @@
 
 				<div class="checkbox"  ng-repeat="todo in todos">
                                   <label>
-                                  <input type="checkbox"> {{ todo.text }}
+                                  <input type="checkbox" id="complete" onclick="completeTodo()"> {{ todo.text }}
                                   </label>
                                  </div>
-                             
+				<!-- Added - Kevin Lai -->
+				function completeTodo(){
+				
+				if(document.getElementById("complete").checked == true)
+					document.getElementById("complete").checked = false;
+                                }
+				else{
+				     document.getElementById("complete").checked = true;
+				
+				}
+				                            
 				<p class="text-center" ng-show="loading">
 					<span class="fa fa-spinner fa-spin fa-3x"></span>
 				</p>
@@ -62,7 +72,7 @@
 						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
 						<input type="text" class="form-control input-lg text-center" placeholder="I want to buy a puppy" ng-model="formData.text">
 					</div>
-
+					
 					<!-- createToDo() WILL CREATE NEW TODOS -->
 					<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
 				</form>
